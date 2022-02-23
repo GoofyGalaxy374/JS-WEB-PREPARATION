@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+
+    <!-- Do not forget to change the path to the css file -->
+    <link rel="stylesheet" href="../static/style/css/style.css">
+</head>
+
+<body>
+
+    <div id="box">
+
+        <!-- In case of error, you should display div with class "error-box" -->
+        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+        <!--<div class="error-box">
+            <p>Error</p>
+        </div>-->
+        <nav>
+
+            <!-- Do not forget to change the path to the image -->
+            <img src="./style/img/art-logo.png" alt="logo">
+            <a href="/">ArtGallery</a>
+
+            <ul class="menu">
+                <li><a href="/">Gallery</a></li>
+                {{#if data}}
+                <!-- Logged users -->
+                <li><a href="/create">Create Publication</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
+                <!-- Guest users -->
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+
+        </nav>
+
+        <main>
+
+            <section id="home-page">
+                <article class="auto-content">
+                    <h1>NEWS OF OUR</h1>
+                    <h2>ART GALLERY</h2>
+                </article>
+            </section>
+
+            <section id="home-page-content">
+                <h1>Statistics of shared publication</h1>
+                {{#if posts}}
+                <article class="home-page-content-publications">
+                    <!--If there are publications in the database, show the following view for each created publication-->
+                    {{#each posts}}
+                        <article class="content-publication">
+                            <h1>Title: {{title}}</h1>
+
+                            <!--If no one has shared the post yet, the number should be zero -->
+                            <p>Number of people shared the publication: {{usersShared.length}}</p>
+                            <a href="/details/{{_id}}" class="image-details">View publication</a>
+                        </article>
+                    {{/each}}
+
+
+                    {{else}}
+                    <!--If there are no publications yet, show:-->
+                    <article class="no-publication">
+                        <h1>There are no publications yet.</h1>
+                        <a href="/" class="view-gallery">View Gallery</a>
+                    </article>
+                </article>
+                {{/if}}
+
+            </section>
+
+        </main>
+
+        <footer>
+            © Js Back-End Retake Exam 2021
+        </footer>
+    </div>
+</body>
+
+</html>
